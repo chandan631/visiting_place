@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add District</title>
+</head>
+<body>
+    <h1 style="text-align: center;">Add Your District</h1>
+    <form style="text-align: center" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+            <label for="district">District Name : </label>
+            <input type="text" id="district" name="district"  required><br><br>
+            <button type="submit">Submit</button>
+    </form>
+</body>
+</html>

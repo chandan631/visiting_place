@@ -52,7 +52,6 @@ def display(request):
 
         if st:
             districts = districts.filter(state_id=st)
-
         if dist :
             places = places.filter(district_id=dist)
         elif st:
@@ -67,9 +66,18 @@ def display(request):
     })
 
 
+# def add_state(request):
+#     if request.method == 'POST':
+#         state = request.POST.get('state')
+#         State.objects.create(name=state)
+#     return render(request, 'add_state.html', )
 
 
-
+def add_district(request):
+    if request.method == 'POST':
+        district = request.POST.get('district')
+        State.objects.create(name=district)
+    return render(request, 'add_district.html', )
 
 
 
