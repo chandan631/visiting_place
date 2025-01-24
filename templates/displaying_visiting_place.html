@@ -64,7 +64,7 @@
 
 
                 <label for="district">District:</label>
-                <select id="district" name="district">
+                <select id="district" name="district" onchange="this.form.submit()">
                     <option value="">Select District</option>
                     {% for district in districts %}
                         <option value="{{ district.id }}" {% if district.id == dist %}selected{% endif %}>
@@ -72,7 +72,6 @@
                         </option>
                     {% endfor %}
                 </select>
-                <button type="submit">Apply</button>
             </form>
     </div>
 
