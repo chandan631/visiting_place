@@ -53,8 +53,10 @@ def display(request):
         if st:
             districts = districts.filter(state_id=st)
 
-        if dist:
+        if dist :
             places = places.filter(district_id=dist)
+        elif st:
+            places = places.filter(district__state_id=st)
 
     return render(request, 'displaying_visiting_place.html', {
         'places': places,
