@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Visiting Place</title>
+</head>
+<body>
+    <h1 style="text-align: center;">Add Visiting Place</h1>
+    <form style="text-align: center" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="filter-container">
+            <label for="state">State:</label>
+            <select id="state" name="state" onchange="this.form.submit()">
+                <option value="">Select State</option>
+                {% for state in states %}
+                    <option value="{{ state.id }}" {% if state.id == st %}selected{% endif %}>
+                        {{ state.name }}
+                    </option>
+                {% endfor %}
+            </select>
+
+            <label for="district">District:</label>
+            <select id="district" name="district" onchange="this.form.submit()">
+                <option value="">Select District</option>
+                {% for district in districts %}
+                    <option value="{{ district.id }}" {% if district.id == dist %}selected{% endif %}>
+                        {{ district.name }}
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+        <br>
+
+        <div>
+            <label for="visiting_place_name">Add Visiting Place Name:</label>
+            <input type="text" id="visiting_place_name" name="visiting_place_name" required><br><br>
+
+            <label for="popularity">Popularity:</label>
+            <input type="number" id="popularity" name="popularity" min="1"  required><br><br>
+
+            <label for="image">Image:</label>
+            <input type="file" id="image" name="image" accept="image/*"><br><br>
+
+            <button type="submit">Submit</button>
+        </div>
+    </form>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

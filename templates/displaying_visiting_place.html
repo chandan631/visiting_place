@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visiting Places Gallery</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+        .place-card {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+            width: 250px;
+            text-align: center;
+            box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        .place-card img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+        .place-details {
+            margin-top: 10px;
+            text-align: left;
+        }
+        .place-details p {
+            margin: 5px 0;
+        }
+        .filter-container {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        select {
+            padding: 8px;
+            margin: 0 10px;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <h1 style="text-align: center;">Visiting Places Gallery</h1>
+
+    <!-- Filter Section -->
+    <div class="filter-container">
+            <form method="POST">
+                {% csrf_token %}
+                <label for="state">State:</label>
+                <select id="state" name="state" onchange="this.form.submit()" >
+                    <option value="">Select State</option>
+                    {% for state in states %}
+                        <option value="{{ state.id }}" {% if state.id == st %}selected{% endif %}>
+                            {{ state.name }}
+                        </option>
+                    {% endfor %}
+                </select>
+
+
+                <label for="district">District:</label>
+                <select id="district" name="district">
+                    <option value="">Select District</option>
+                    {% for district in districts %}
+                        <option value="{{ district.id }}" {% if district.id == dist %}selected{% endif %}>
+                            {{ district.name }}
+                        </option>
+                    {% endfor %}
+                </select>
+                <button type="submit">Apply</button>
+            </form>
+    </div>
+
+
+    <!-- Gallery Section -->
+        <div class="gallery">
+            {% for place in places %}
+            <div class="place-card">
+                {% if place.image %}
+                <img src="{{ place.image.url }}" alt="Image of {{ place.name }}">
+                {% else %}
+                <img src="https://images.freeimages.com/images/large-previews/bb9/sunset-1182872.jpg" alt="Default image">
+                {% endif %}
+                <div class="place-details">
+                    <h3>{{ place.name }}</h3>
+                    <p><strong>District:</strong> {{ place.district.name }}</p>
+                    <p><strong>State:</strong> {{ place.district.state.name }}</p>
+                    <p><strong>Popularity:</strong> {{ place.popularity }}</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+</body>
+</html>
